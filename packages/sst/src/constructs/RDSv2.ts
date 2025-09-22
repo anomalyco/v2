@@ -288,7 +288,7 @@ export class RDSv2 extends Construct implements SSTConstruct {
       handler: path.resolve(
         path.join(__dirname, '../support/rds-migrator/index.handler')
       ),
-      runtime: 'nodejs18.x',
+      runtime: 'nodejs22.x',
       timeout: 900,
       memorySize: 1024,
       environment: {
@@ -317,7 +317,7 @@ export class RDSv2 extends Construct implements SSTConstruct {
 
     const handler = new LambdaFunction(this, 'MigrationHandler', {
       code: Code.fromAsset(path.join(__dirname, '../support/script-function')),
-      runtime: Runtime.NODEJS_20_X,
+      runtime: Runtime.NODEJS_22_X,
       handler: 'index.handler',
       timeout: CDKDuration.minutes(15),
       memorySize: 1024,
