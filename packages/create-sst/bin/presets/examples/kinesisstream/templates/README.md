@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/kinesisstream
 # Or with Yarn
-$ yarn create sst --template=examples/kinesisstream
+$ yarn create sst@two --template=examples/kinesisstream
 # Or with PNPM
-$ pnpm create sst --template=examples/kinesisstream
+$ pnpm create sst@two --template=examples/kinesisstream
 ```
 
 ## Commands

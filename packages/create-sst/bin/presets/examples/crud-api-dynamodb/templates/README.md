@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/crud-api-dynamodb
 # Or with Yarn
-$ yarn create sst --template=examples/crud-api-dynamodb
+$ yarn create sst@two --template=examples/crud-api-dynamodb
 # Or with PNPM
-$ pnpm create sst --template=examples/crud-api-dynamodb
+$ pnpm create sst@two --template=examples/crud-api-dynamodb
 ```
 
 ## Commands

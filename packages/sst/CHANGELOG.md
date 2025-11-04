@@ -1,5 +1,33 @@
 # @serverless-stack/cli2
 
+## 2.49.6
+
+### Patch Changes
+
+- [#95](https://github.com/sst/v2/pull/95) [`5b3207c0c69bbd015c67562a965e4f848fab24be`](https://github.com/sst/v2/commit/5b3207c0c69bbd015c67562a965e4f848fab24be) Thanks [@jl4nz](https://github.com/jl4nz)! - Fix path resolution - including windows
+
+## 2.49.5
+
+### Patch Changes
+
+- [#109](https://github.com/sst/v2/pull/109) [`7727c4eb5019383f569e2653bdd240a7a05956a1`](https://github.com/sst/v2/commit/7727c4eb5019383f569e2653bdd240a7a05956a1) Thanks [@berenddeboer](https://github.com/berenddeboer)! - fix **vite_ssr_import_meta**.resolve is not a function
+
+## 2.49.4
+
+### Patch Changes
+
+- [#45](https://github.com/sst/v2/pull/45) [`27f818d8f336a207651209edae1b9b92282fc1ab`](https://github.com/sst/v2/commit/27f818d8f336a207651209edae1b9b92282fc1ab) Thanks [@adriencaccia](https://github.com/adriencaccia)! - Ensure error name is correct when using local lambda dev mode
+
+- [#96](https://github.com/sst/v2/pull/96) [`dc702c7aaebd281ee5c3e87d43251deb35fe75d9`](https://github.com/sst/v2/commit/dc702c7aaebd281ee5c3e87d43251deb35fe75d9) Thanks [@hoangnd25](https://github.com/hoangnd25)! - Passing deploy role to stack params
+
+- [`53fe1364323300459b1598b0ae556261d77a9dc7`](https://github.com/sst/v2/commit/53fe1364323300459b1598b0ae556261d77a9dc7) Thanks [@fwang](https://github.com/fwang)! - Pass stackName to DescribeStacksCommand instead of id
+
+## 2.49.3
+
+### Patch Changes
+
+- [#84](https://github.com/sst/v2/pull/84) [`c8802afb4e4f7960003325839e2a51ad35d4ef4e`](https://github.com/sst/v2/commit/c8802afb4e4f7960003325839e2a51ad35d4ef4e) Thanks [@muametgrooby](https://github.com/muametgrooby)! - use tag 'two' instead of 'latest' in sst update
+
 ## 2.49.2
 
 ### Patch Changes

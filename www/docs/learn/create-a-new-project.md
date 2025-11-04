@@ -39,14 +39,14 @@ npx create-sst@two --template=graphql/rds
 <TabItem value="yarn">
 
 ```bash
-yarn create sst --template=graphql/rds
+yarn create sst@two --template=graphql/rds
 ```
 
 </TabItem>
 <TabItem value="pnpm">
 
 ```bash
-pnpm create sst --template=graphql/rds
+pnpm create sst@two --template=graphql/rds
 ```
 
 </TabItem>

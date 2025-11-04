@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/gatsby-app
 # Or with Yarn
-$ yarn create sst --template=examples/gatsby-app
+$ yarn create sst@two --template=examples/gatsby-app
 # Or with PNPM
-$ pnpm create sst --template=examples/gatsby-app
+$ pnpm create sst@two --template=examples/gatsby-app
 ```
 
 ## Commands

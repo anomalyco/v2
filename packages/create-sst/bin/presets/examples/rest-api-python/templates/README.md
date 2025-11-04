@@ -9,9 +9,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/rest-api-python
 # Or with Yarn
-$ yarn create sst --template=examples/rest-api-python
+$ yarn create sst@two --template=examples/rest-api-python
 # Or with PNPM
-$ pnpm create sst --template=examples/rest-api-python
+$ pnpm create sst@two --template=examples/rest-api-python
 ```
 
 ## Commands

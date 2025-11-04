@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/expo-app
 # Or with Yarn
-$ yarn create sst --template=examples/expo-app
+$ yarn create sst@two --template=examples/expo-app
 # Or with PNPM
-$ pnpm create sst --template=examples/expo-app
+$ pnpm create sst@two --template=examples/expo-app
 ```
 
 ## Commands

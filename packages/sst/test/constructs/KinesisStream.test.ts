@@ -264,11 +264,6 @@ test("attachPermissions", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: "*" },
       ],
       Version: "2012-10-17",
@@ -290,11 +285,6 @@ test("attachPermissions", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
@@ -333,11 +323,6 @@ test("attachPermissionsToConsumer", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: "*" },
       ],
       Version: "2012-10-17",
@@ -359,11 +344,6 @@ test("attachPermissionsToConsumer", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
@@ -421,11 +401,6 @@ test("attachPermissions-after-addConsumers", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: "*" },
       ],
       Version: "2012-10-17",
@@ -448,14 +423,6 @@ test("attachPermissions-after-addConsumers", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: {
-            "Fn::ImportValue":
-              "test-app-stackA:ExportsOutputFnGetAttStream862536A4Arn22664C11",
-          },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: {
             "Fn::ImportValue":
@@ -498,11 +465,6 @@ test("bind", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: ANY },
       ],
       Version: "2012-10-17",
@@ -524,11 +486,6 @@ test("bind", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
@@ -568,11 +525,6 @@ test("bindToConsumer", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: ANY },
       ],
       Version: "2012-10-17",
@@ -594,11 +546,6 @@ test("bindToConsumer", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
@@ -658,11 +605,6 @@ test("bind-after-addConsumers", async () => {
           Effect: "Allow",
           Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
         },
-        {
-          Action: "kinesis:DescribeStream",
-          Effect: "Allow",
-          Resource: { "Fn::GetAtt": ["Stream862536A4", "Arn"] },
-        },
         { Action: "s3:*", Effect: "Allow", Resource: ANY },
       ],
       Version: "2012-10-17",
@@ -685,14 +627,6 @@ test("bind-after-addConsumers", async () => {
             "kinesis:ListStreams",
             "kinesis:DescribeStreamConsumer",
           ],
-          Effect: "Allow",
-          Resource: {
-            "Fn::ImportValue":
-              "test-app-stackA:ExportsOutputFnGetAttStream862536A4Arn22664C11",
-          },
-        },
-        {
-          Action: "kinesis:DescribeStream",
           Effect: "Allow",
           Resource: {
             "Fn::ImportValue":

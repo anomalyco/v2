@@ -25,13 +25,13 @@ npm init sst
 Or with Yarn 0.25+
 
 ```bash
-yarn create sst
+yarn create sst@two
 ```
 
 Or with PNPM 
 
 ```bash
-pnpm create sst
+pnpm create sst@two
 ```
 
 This will prompt you for a folder name and bootstrap the application in that directory.

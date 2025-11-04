@@ -9,9 +9,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/rest-api-rust
 # Or with Yarn
-$ yarn create sst --template=examples/rest-api-rust
+$ yarn create sst@two --template=examples/rest-api-rust
 # Or with PNPM
-$ pnpm create sst --template=examples/rest-api-rust
+$ pnpm create sst@two --template=examples/rest-api-rust
 ```
 
 ## Commands

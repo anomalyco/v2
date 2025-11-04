@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/rest-api-postgresql
 # Or with Yarn
-$ yarn create sst --template=examples/rest-api-postgresql
+$ yarn create sst@two --template=examples/rest-api-postgresql
 # Or with PNPM
-$ pnpm create sst --template=examples/rest-api-postgresql
+$ pnpm create sst@two --template=examples/rest-api-postgresql
 ```
 
 ## Commands

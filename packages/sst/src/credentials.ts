@@ -1,4 +1,5 @@
 import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
 import type { AwsCredentialIdentityProvider } from "@aws-sdk/types";
 import { fromNodeProviderChain } from "@aws-sdk/credential-providers";
 import { GetCallerIdentityCommand, STSClient } from "@aws-sdk/client-sts";
@@ -16,7 +17,7 @@ export const useAWSCredentialsProvider: () => AwsCredentialIdentityProvider =
     const project = useProject();
     Logger.debug("Using AWS profile", project.config.profile);
     const provider = fromNodeProviderChain({
-      clientConfig: { region: project.config.region },
+      parentClientConfig: { region: project.config.region },
       profile: project.config.profile,
       roleArn: project.config.role,
       mfaCodeProvider: async (serialArn: string) => {
@@ -146,13 +147,19 @@ export function useAWSClient<C extends any>(
 
 export const useAWSProvider = lazy(async () => {
   const cdkToolkitUrl = await import.meta.resolve!("@aws-cdk/toolkit-lib");
-  const cdkToolkitPath = new URL(cdkToolkitUrl).pathname;
+  const cdkToolkitPath = fileURLToPath(cdkToolkitUrl);
   const { SdkProvider } = await import(
-    path.resolve(cdkToolkitPath, "..", "api", "aws-auth", "sdk-provider.js")
+    pathToFileURL(
+      path.resolve(cdkToolkitPath, "..", "api", "aws-auth", "sdk-provider.js")
+    ).href
   );
+
   const { IoHelper } = await import(
-    path.resolve(cdkToolkitPath, "..", "api", "io", "private", "io-helper.js")
+    pathToFileURL(
+      path.resolve(cdkToolkitPath, "..", "api", "io", "private", "io-helper.js")
+    ).href
   );
+
   const project = useProject();
   return new SdkProvider(useAWSCredentialsProvider(), project.config.region!, {
     ioHelper: IoHelper.fromActionAwareIoHost({

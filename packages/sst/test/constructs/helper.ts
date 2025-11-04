@@ -1,17 +1,12 @@
 import { Match, Matcher, MatchResult, Template } from "aws-cdk-lib/assertions";
 import { Stack } from "aws-cdk-lib";
-import { App, AppDeployProps, AppProps } from "../../dist/constructs";
+import { App, AppDeployProps } from "../../dist/constructs";
 import { setProject, useProject } from "../../dist/project.js";
-import { useNodeHandler } from "../../dist/runtime/handlers/node.js";
-import { usePythonHandler } from "../../dist/runtime/handlers/python.js";
-import { useDotnetHandler } from "../../dist/runtime/handlers/dotnet.js";
-import { useJavaHandler } from "../../dist/runtime/handlers/java.js";
-import { useGoHandler } from "../../dist/runtime/handlers/go.js";
-import { useContainerHandler } from "../../dist/runtime/handlers/container.js";
-import os from "os";
-import path from "path";
-import fs from "fs/promises";
-import crypto from "crypto";
+
+import * as os from "os";
+import * as path from "path";
+import * as fs from "fs/promises";
+import * as crypto from "crypto";
 
 ///////////////////////
 // Matcher functions //
@@ -34,6 +29,7 @@ export async function createApp(props?: Partial<AppDeployProps>) {
   setProject({
     version: "test",
     cdkVersion: "test",
+    constructsVersion: "test",
     stacks: async () => {},
     metafile: null as any,
     config: {

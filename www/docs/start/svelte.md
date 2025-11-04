@@ -68,14 +68,14 @@ npx create-sst@two
 <TabItem value="yarn">
 
 ```bash
-yarn create sst
+yarn create sst@two
 ```
 
 </TabItem>
 <TabItem value="pnpm">
 
 ```bash
-pnpm create sst
+pnpm create sst@two
 ```
 
 </TabItem>

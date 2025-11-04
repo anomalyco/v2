@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/websocket
 # Or with Yarn
-$ yarn create sst --template=examples/websocket
+$ yarn create sst@two --template=examples/websocket
 # Or with PNPM
-$ pnpm create sst --template=examples/websocket
+$ pnpm create sst@two --template=examples/websocket
 ```
 
 ## Commands

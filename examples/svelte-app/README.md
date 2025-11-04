@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/svelte-app
 # Or with Yarn
-$ yarn create sst --template=examples/svelte-app
+$ yarn create sst@two --template=examples/svelte-app
 # Or with PNPM
-$ pnpm create sst --template=examples/svelte-app
+$ pnpm create sst@two --template=examples/svelte-app
 ```
 
 ## Commands

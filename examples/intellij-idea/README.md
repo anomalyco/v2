@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/intellij-idea
 # Or with Yarn
-$ yarn create sst --template=examples/intellij-idea
+$ yarn create sst@two --template=examples/intellij-idea
 # Or with PNPM
-$ pnpm create sst --template=examples/intellij-idea
+$ pnpm create sst@two --template=examples/intellij-idea
 ```
 
 ## Commands

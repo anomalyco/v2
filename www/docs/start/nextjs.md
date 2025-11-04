@@ -70,7 +70,7 @@ npx create-sst@two
 
 ```bash
 cd my-app
-yarn create sst
+yarn create sst@two
 ```
 
 </TabItem>
@@ -78,7 +78,7 @@ yarn create sst
 
 ```bash
 cd my-app
-pnpm create sst
+pnpm create sst@two
 ```
 
 </TabItem>

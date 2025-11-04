@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/api-oauth-github
 # Or with Yarn
-$ yarn create sst --template=examples/api-oauth-github
+$ yarn create sst@two --template=examples/api-oauth-github
 # Or with PNPM
-$ pnpm create sst --template=examples/api-oauth-github
+$ pnpm create sst@two --template=examples/api-oauth-github
 ```
 
 ## Commands

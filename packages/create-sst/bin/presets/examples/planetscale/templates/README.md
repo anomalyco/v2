@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/planetscale
 # Or with Yarn
-$ yarn create sst --template=examples/planetscale
+$ yarn create sst@two --template=examples/planetscale
 # Or with PNPM
-$ pnpm create sst --template=examples/planetscale
+$ pnpm create sst@two --template=examples/planetscale
 ```
 
 ## Commands

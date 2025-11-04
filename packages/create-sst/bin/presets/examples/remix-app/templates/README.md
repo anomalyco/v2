@@ -9,9 +9,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/remix-app
 # Or with Yarn
-$ yarn create sst --template=examples/remix-app
+$ yarn create sst@two --template=examples/remix-app
 # Or with PNPM
-$ pnpm create sst --template=examples/remix-app
+$ pnpm create sst@two --template=examples/remix-app
 ```
 
 ## Commands

@@ -98,7 +98,7 @@ async function error(ex: any) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      errorType: "Error",
+      errorType: ex.name ?? "Error",
       errorMessage: ex.message,
       trace: ex.stack?.split("\n"),
     }),

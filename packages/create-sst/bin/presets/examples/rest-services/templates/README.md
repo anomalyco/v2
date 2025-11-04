@@ -11,9 +11,9 @@ Install the example.
 ```bash
 $ npx create-sst@two --template=examples/rest-api
 # Or with Yarn
-$ yarn create sst --template=examples/rest-api
+$ yarn create sst@two --template=examples/rest-api
 # Or with PNPM
-$ pnpm create sst --template=examples/rest-api
+$ pnpm create sst@two --template=examples/rest-api
 ```
 
 ## Commands
