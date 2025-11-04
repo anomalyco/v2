@@ -51,7 +51,7 @@ export interface RDSProps {
     | "postgresql13.12"
     | "postgresql13.9"
     | "postgresql14.10"
-    | "postgresql15.5"
+    | "postgresql15.12"
     | "postgresql16.1";
 
   /**
@@ -459,9 +459,9 @@ export class RDS extends Construct implements SSTConstruct {
       return DatabaseClusterEngine.auroraPostgres({
         version: AuroraPostgresEngineVersion.VER_14_10,
       });
-    } else if (engine === "postgresql15.5") {
+    } else if (engine === "postgresql15.12") {
       return DatabaseClusterEngine.auroraPostgres({
-        version: AuroraPostgresEngineVersion.VER_15_5,
+        version: AuroraPostgresEngineVersion.VER_15_12,
       });
     } else if (engine === "postgresql16.1") {
       return DatabaseClusterEngine.auroraPostgres({
