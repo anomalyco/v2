@@ -342,7 +342,7 @@ async function getCloudFormationStack(stack: CloudFormationStackArtifact) {
   const client = useAWSClient(CloudFormationClient);
   try {
     const { Stacks: stacks } = await client.send(
-        new DescribeStacksCommand({
+      new DescribeStacksCommand({
         StackName: stack.stackName,
       })
     );
