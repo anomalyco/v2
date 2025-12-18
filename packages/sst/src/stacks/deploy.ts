@@ -248,7 +248,7 @@ async function addInUseExports(
   }
 }
 
-async function createCdkDeployments() {
+export async function createCdkDeployments() {
   const cdkToolkitUrl = await import.meta.resolve!("@aws-cdk/toolkit-lib");
   const cdkToolkitPath = fileURLToPath(cdkToolkitUrl);
   const { Deployments } = await import(
