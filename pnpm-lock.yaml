@@ -402,7 +402,7 @@ importers:
         specifier: ^16.0.3
         version: 16.5.0
       esbuild:
-        specifier: 0.27.2
+        specifier: ^0.27.2
         version: 0.27.2
       express:
         specifier: ^4.18.2
