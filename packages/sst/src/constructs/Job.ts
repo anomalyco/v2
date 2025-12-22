@@ -52,8 +52,8 @@ import { Colors } from "../cli/colors.js";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 export type JobMemorySize = "3 GB" | "7 GB" | "15 GB" | "145 GB";
-export interface JobNodeJSProps extends NodeJSProps {}
-export interface JobContainerCacheProps extends DockerCacheOption {}
+export interface JobNodeJSProps extends NodeJSProps { }
+export interface JobContainerCacheProps extends DockerCacheOption { }
 export interface JobContainerProps {
   /**
    * Specify or override the CMD on the Docker image.
@@ -151,12 +151,13 @@ export interface JobProps {
    *```
    */
   runtime?:
-    | "nodejs"
-    | "nodejs16.x"
-    | "nodejs18.x"
-    | "nodejs20.x"
-    | "nodejs22.x"
-    | "container";
+  | "nodejs"
+  | "nodejs16.x"
+  | "nodejs18.x"
+  | "nodejs20.x"
+  | "nodejs22.x"
+  | "nodejs24.x"
+  | "container";
   /**
    * For "nodejs" runtime, point to the entry point and handler function.
    * Of the format: `/path/to/file.function`.
@@ -651,6 +652,7 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18.2023.12.14.13",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20.2023.12.14.13",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22.2024.11.22.14",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24.2025.12.21.13",
         },
         x86_64: {
           nodejs: "amazon/aws-lambda-nodejs:16",
@@ -658,6 +660,7 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24",
         },
       };
       const image = LinuxBuildImage.fromDockerRegistry(
@@ -687,8 +690,7 @@ export class Job extends Construct implements SSTConstruct {
           actions: ["s3:*"],
           effect: Effect.ALLOW,
           resources: [
-            `arn:${Stack.of(this).partition}:s3:::${
-              codeConfig.s3Location?.bucketName
+            `arn:${Stack.of(this).partition}:s3:::${codeConfig.s3Location?.bucketName
             }/${codeConfig.s3Location?.objectKey}`,
           ],
         }),
@@ -712,15 +714,15 @@ export class Job extends Construct implements SSTConstruct {
       initialPolicy: [
         this.liveDevJob
           ? new PolicyStatement({
-              effect: Effect.ALLOW,
-              actions: ["lambda:InvokeFunction"],
-              resources: [this.liveDevJob.functionArn],
-            })
+            effect: Effect.ALLOW,
+            actions: ["lambda:InvokeFunction"],
+            resources: [this.liveDevJob.functionArn],
+          })
           : new PolicyStatement({
-              effect: Effect.ALLOW,
-              actions: ["codebuild:StartBuild", "codebuild:StopBuild"],
-              resources: [this.job.projectArn],
-            }),
+            effect: Effect.ALLOW,
+            actions: ["codebuild:StartBuild", "codebuild:StopBuild"],
+            resources: [this.job.projectArn],
+          }),
       ],
     });
   }

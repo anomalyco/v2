@@ -47,7 +47,7 @@ const lambdaDefaultPolicy = {
 test("handlerPath: entry", async () => {
   const app = await createApp();
   const stack = new Stack(app, "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/constructs/lambda.handler",
   });
   await app.finish();
@@ -72,7 +72,7 @@ test("constructor: props with minimum config", async () => {
 
 test("constructor: props with full config", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/constructs/lambda.handler",
     timeout: 20,
     memorySize: 512,
@@ -87,13 +87,13 @@ test("constructor: props with full config", async () => {
 test("constructor: props without handler", async () => {
   const stack = new Stack(await createApp(), "stack");
   expect(() => {
-    new Function(stack, "Function", {});
+    new SstFunction(stack, "Function", {});
   }).toThrow(/No handler defined/);
 });
 
 test("constructor: props disabling live development ", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     enableLiveDev: false,
     handler: "test/constructs/lambda.handler",
   });
@@ -125,7 +125,7 @@ test("constructor: liveDev prop defaults to true", async () => {
 
 test("constructor: handler is jsx", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/constructs/lambda-jsx.handler",
   });
   countResources(stack, "AWS::Lambda::Function", 1);
@@ -134,7 +134,7 @@ test("constructor: handler is jsx", async () => {
 test("constructor: handler not exist", async () => {
   const app = await createApp();
   const stack = new Stack(app, "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/random.handler",
   });
   await expect(async () => {
@@ -155,7 +155,7 @@ test("functionName: undefined", async () => {
 
 test("functionName: string", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     functionName: "my-fn-name",
     handler: "test/constructs/lambda.handler",
   });
@@ -167,7 +167,7 @@ test("functionName: string", async () => {
 
 test("functionName: callback", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     functionName: ({ functionProps, stack }) =>
       `${stack.stackName}-${path.parse(functionProps.handler!).name}`,
     handler: "test/lambda.handler",
@@ -180,7 +180,7 @@ test("functionName: callback", async () => {
 
 test("copyFiles", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/lambda.handler",
     copyFiles: [{ from: "test/lambda.js", to: "test/lambda.js" }],
   });
@@ -188,7 +188,7 @@ test("copyFiles", async () => {
 
 test("copyFiles infer to", async () => {
   const stack = new Stack(await createApp(), "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/lambda.handler",
     copyFiles: [{ from: "test/lambda.js" }],
   });
@@ -197,7 +197,7 @@ test("copyFiles infer to", async () => {
 test("copyFiles absolute to", async () => {
   const app = await createApp();
   const stack = new Stack(app, "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/constructs/lambda.handler",
     copyFiles: [{ from: "test/lambda.js", to: "/test/fail.js" }],
   });
@@ -209,7 +209,7 @@ test("copyFiles absolute to", async () => {
 test("copyFiles nonexistent", async () => {
   const app = await createApp();
   const stack = new Stack(app, "stack");
-  new Function(stack, "Function", {
+  new SstFunction(stack, "Function", {
     handler: "test/constructs/lambda.handler",
     copyFiles: [{ from: "test/fail.js", to: "test/fail.js" }],
   });
@@ -241,6 +241,19 @@ test("runtime: nodejs22.x", async () => {
   await app.finish();
   hasResource(stack, "AWS::Lambda::Function", {
     Runtime: "nodejs22.x",
+  });
+});
+
+test("runtime: nodejs24.x", async () => {
+  const app = await createApp();
+  const stack = new Stack(app, "stack");
+  new Function(stack, "Function", {
+    handler: "test/constructs/lambda.handler",
+    runtime: "nodejs24.x",
+  });
+  await app.finish();
+  hasResource(stack, "AWS::Lambda::Function", {
+    Runtime: "nodejs24.x",
   });
 });
 
@@ -668,8 +681,8 @@ test("bundle: commandHooks-beforeBundling success", async () => {
   new Function(stack, "Function", {
     handler: "test/lambda.handler",
     hooks: {
-      afterBuild: async () => {},
-      beforeBuild: async () => {},
+      afterBuild: async () => { },
+      beforeBuild: async () => { },
     },
   });
   countResources(stack, "AWS::Lambda::Function", 1);
