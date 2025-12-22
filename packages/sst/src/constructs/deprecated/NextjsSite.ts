@@ -35,19 +35,22 @@ import * as route53Patterns from "aws-cdk-lib/aws-route53-patterns";
 import * as lambdaEventSources from "aws-cdk-lib/aws-lambda-event-sources";
 import type { RoutesManifest } from "@sls-next/lambda-at-edge";
 
-import { App } from "../App.js";
+import type { App } from "../App.js";
 import { Stack } from "../Stack.js";
-import { SSTConstruct, isCDKConstruct } from "../Construct.js";
-import { DistributionDomainProps } from "../Distribution.js";
+import type { SSTConstruct } from "../Construct.js";
+import { isCDKConstruct } from "../Construct.js";
+import type { DistributionDomainProps } from "../Distribution.js";
 import {
-  BaseSiteReplaceProps,
-  BaseSiteCdkDistributionProps,
+  type BaseSiteReplaceProps,
+  type BaseSiteCdkDistributionProps,
   getBuildCmdEnvironment,
   buildErrorResponsesForRedirectToIndex,
 } from "../BaseSite.js";
-import { Permissions, attachPermissionsToRole } from "../util/permission.js";
+import type { Permissions } from "../util/permission.js";
+import { attachPermissionsToRole } from "../util/permission.js";
 import { getHandlerHash } from "../util/builder.js";
-import { BindingProps, getParameterPath } from "../util/binding.js";
+import type { BindingProps } from "../util/binding.js";
+import { getParameterPath } from "../util/binding.js";
 import * as crossRegionHelper from "./cross-region-helper.js";
 import { gray, red } from "colorette";
 import { useProject } from "../../project.js";
@@ -56,9 +59,9 @@ import { createAppContext } from "../context.js";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-export interface NextjsDomainProps extends DistributionDomainProps {}
+export interface NextjsDomainProps extends DistributionDomainProps { }
 export interface NextjsCdkDistributionProps
-  extends BaseSiteCdkDistributionProps {}
+  extends BaseSiteCdkDistributionProps { }
 export interface NextjsSiteProps {
   /**
    * Path to the directory where the website source is located.
@@ -127,7 +130,7 @@ export interface NextjsSiteProps {
        * })
        *```
        */
-      runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+      runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x";
     };
   };
   /**
@@ -317,8 +320,8 @@ export class NextjsSite extends Construct implements SSTConstruct {
     this.sstBuildDir = useProject().paths.artifacts;
     const fileSizeLimit = app.isRunningSSTTest()
       ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore: "sstTestFileSizeLimitOverride" not exposed in props
-        props.sstTestFileSizeLimitOverride || 200
+      // @ts-ignore: "sstTestFileSizeLimitOverride" not exposed in props
+      props.sstTestFileSizeLimitOverride || 200
       : 200;
 
     this.props = props;
@@ -476,8 +479,7 @@ export class NextjsSite extends Construct implements SSTConstruct {
       },
       permissions: {
         "ssm:GetParameters": [
-          `arn:${Stack.of(this).partition}:ssm:${app.region}:${
-            app.account
+          `arn:${Stack.of(this).partition}:ssm:${app.region}:${app.account
           }:parameter${getParameterPath(this, "url")}`,
         ],
       },
@@ -693,8 +695,7 @@ export class NextjsSite extends Construct implements SSTConstruct {
         ManagedPolicy.fromManagedPolicyArn(
           this,
           "EdgeLambdaPolicy",
-          `arn:${
-            Stack.of(this).partition
+          `arn:${Stack.of(this).partition
           }:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`
         ),
       ],
@@ -809,8 +810,7 @@ export class NextjsSite extends Construct implements SSTConstruct {
         effect: Effect.ALLOW,
         actions: ["s3:*"],
         resources: [
-          `arn:${Stack.of(this).partition}:s3:::${asset.s3BucketName}/${
-            asset.s3ObjectKey
+          `arn:${Stack.of(this).partition}:s3:::${asset.s3BucketName}/${asset.s3ObjectKey
           }`,
         ],
       })
@@ -925,8 +925,8 @@ export class NextjsSite extends Construct implements SSTConstruct {
     const app = this.node.root as App;
     const buildOutput = app.isRunningSSTTest()
       ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore: "sstTestBuildOutputPath" not exposed in props
-        props.sstTestBuildOutputPath || this.runBuild()
+      // @ts-ignore: "sstTestBuildOutputPath" not exposed in props
+      props.sstTestBuildOutputPath || this.runBuild()
       : this.runBuild();
 
     this.runAfterBuild();
@@ -940,8 +940,7 @@ export class NextjsSite extends Construct implements SSTConstruct {
     // validate site path exists
     if (!fs.existsSync(sitePath)) {
       throw new Error(
-        `No path found at "${path.resolve(sitePath)}" for the "${
-          this.node.id
+        `No path found at "${path.resolve(sitePath)}" for the "${this.node.id
         }" NextjsSite.`
       );
     }
@@ -1222,8 +1221,8 @@ export class NextjsSite extends Construct implements SSTConstruct {
     const waitForInvalidation = this.isPlaceholder
       ? false
       : this.props.waitForInvalidation === false
-      ? false
-      : true;
+        ? false
+        : true;
 
     const resource = new CustomResource(this, "CloudFrontInvalidator", {
       serviceToken: stack.customResourceHandler.functionArn,
@@ -1490,6 +1489,9 @@ export class NextjsSite extends Construct implements SSTConstruct {
   }
 
   private normalizeRuntime(runtime?: string): lambda.Runtime {
+    if (runtime === "nodejs24.x") {
+      return lambda.Runtime.NODEJS_24_X;
+    }
     if (runtime === "nodejs22.x") {
       return lambda.Runtime.NODEJS_22_X;
     }

@@ -60,7 +60,7 @@ export interface SsrFunctionProps
   extends Omit<FunctionOptions, "memorySize" | "timeout" | "runtime"> {
   bundle?: string;
   handler: string;
-  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x";
   timeout?: number | Duration;
   memorySize?: number | Size;
   permissions?: Permissions;
@@ -190,6 +190,12 @@ export class SsrFunction extends Construct implements SSTConstruct {
       logRetention,
     } = this.props;
 
+
+    const runtimeMap: Record<string, Runtime> = {
+      "nodejs24.x": Runtime.NODEJS_24_X,
+      "nodejs22.x": Runtime.NODEJS_22_X,
+      "nodejs20.x": Runtime.NODEJS_20_X,
+    };
     return new CdkFunction(this, `ServerFunction`, {
       ...this.props,
       handler: handler.split(path.sep).join(path.posix.sep),
@@ -198,12 +204,7 @@ export class SsrFunction extends Construct implements SSTConstruct {
         Bucket.fromBucketName(this, "IServerFunctionBucket", assetBucket),
         assetKey
       ),
-      runtime:
-          runtime === "nodejs22.x"
-          ? Runtime.NODEJS_22_X
-          : runtime === "nodejs20.x"
-          ? Runtime.NODEJS_20_X
-          : Runtime.NODEJS_18_X,
+      runtime: (runtime && runtimeMap[runtime]) ?? Runtime.NODEJS_18_X,
       architecture,
       memorySize:
         typeof memorySize === "string"
@@ -421,19 +422,19 @@ export class SsrFunction extends Construct implements SSTConstruct {
       path.join(bundle, handlerDir, `${newHandlerName}.mjs`),
       streaming
         ? [
-            `export const ${newHandlerFunction} = awslambda.streamifyResponse(async (event, responseStream, context) => {`,
-            ...injections,
-            `  const { ${oldHandlerFunction}: rawHandler} = await import("./${oldHandlerName}.mjs");`,
-            `  return rawHandler(event, responseStream, context);`,
-            `});`,
-          ].join("\n")
+          `export const ${newHandlerFunction} = awslambda.streamifyResponse(async (event, responseStream, context) => {`,
+          ...injections,
+          `  const { ${oldHandlerFunction}: rawHandler} = await import("./${oldHandlerName}.mjs");`,
+          `  return rawHandler(event, responseStream, context);`,
+          `});`,
+        ].join("\n")
         : [
-            `export const ${newHandlerFunction} = async (event, context) => {`,
-            ...injections,
-            `  const { ${oldHandlerFunction}: rawHandler} = await import("./${oldHandlerName}.mjs");`,
-            `  return rawHandler(event, context);`,
-            `};`,
-          ].join("\n")
+          `export const ${newHandlerFunction} = async (event, context) => {`,
+          ...injections,
+          `  const { ${oldHandlerFunction}: rawHandler} = await import("./${oldHandlerName}.mjs");`,
+          `  return rawHandler(event, context);`,
+          `};`,
+        ].join("\n")
     );
     return path.posix.join(
       handlerDir,

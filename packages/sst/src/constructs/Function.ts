@@ -34,18 +34,20 @@ import { useWarning } from "./util/warning.js";
 import {
   Architecture,
   AssetCode,
-  CfnFunction,
   Code,
   Function as CDKFunction,
-  FunctionOptions,
-  FunctionUrl,
   FunctionUrlAuthType,
   Handler as CDKHandler,
-  ILayerVersion,
   LayerVersion,
   Runtime as CDKRuntime,
   Tracing,
   InvokeMode,
+} from "aws-cdk-lib/aws-lambda";
+import type {
+  CfnFunction,
+  FunctionOptions,
+  FunctionUrl,
+  ILayerVersion,
 } from "aws-cdk-lib/aws-lambda";
 import { RetentionDays } from "aws-cdk-lib/aws-logs";
 import {
@@ -53,10 +55,11 @@ import {
   Size as CDKSize,
   Duration as CDKDuration,
   IgnoreMode,
-  DockerCacheOption,
   CustomResource,
 } from "aws-cdk-lib/core";
-import { Effect, Policy, PolicyStatement, Role } from "aws-cdk-lib/aws-iam";
+import type { DockerCacheOption } from "aws-cdk-lib/core";
+import { Effect, Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
+import type { Role } from "aws-cdk-lib/aws-iam";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 import { Platform } from "aws-cdk-lib/aws-ecr-assets";
 import { useBootstrap } from "../bootstrap.js";
@@ -72,6 +75,7 @@ const supportedRuntimes = {
   "nodejs18.x": CDKRuntime.NODEJS_18_X,
   "nodejs20.x": CDKRuntime.NODEJS_20_X,
   "nodejs22.x": CDKRuntime.NODEJS_22_X,
+  "nodejs24.x": CDKRuntime.NODEJS_24_X,
   "python3.7": CDKRuntime.PYTHON_3_7,
   "python3.8": CDKRuntime.PYTHON_3_8,
   "python3.9": CDKRuntime.PYTHON_3_9,
@@ -93,8 +97,8 @@ const supportedRuntimes = {
 export type Runtime = keyof typeof supportedRuntimes;
 export type FunctionInlineDefinition = string | Function;
 export type FunctionDefinition = string | Function | FunctionProps;
-export interface FunctionUrlCorsProps extends functionUrlCors.CorsProps {}
-export interface FunctionDockerBuildCacheProps extends DockerCacheOption {}
+export interface FunctionUrlCorsProps extends functionUrlCors.CorsProps { }
+export interface FunctionDockerBuildCacheProps extends DockerCacheOption { }
 
 export interface FunctionDockerBuildProps {
   /**
@@ -898,12 +902,12 @@ export class Function extends CDKFunction implements SSTConstruct {
     const diskSize = Function.normalizeDiskSize(props.diskSize);
     const tracing =
       Tracing[
-        (props.tracing || "active").toUpperCase() as keyof typeof Tracing
+      (props.tracing || "active").toUpperCase() as keyof typeof Tracing
       ];
     const logRetention =
       props.logRetention &&
       RetentionDays[
-        props.logRetention.toUpperCase() as keyof typeof RetentionDays
+      props.logRetention.toUpperCase() as keyof typeof RetentionDays
       ];
     const isLiveDevEnabled =
       app.mode === "dev" && (props.enableLiveDev === false ? false : true);
@@ -960,28 +964,28 @@ export class Function extends CDKFunction implements SSTConstruct {
         ...props,
         ...(props.runtime === "container"
           ? {
-              description,
-              code: Code.fromAssetImage(
-                path.resolve(__dirname, "../support/bridge"),
-                {
-                  ...(architecture?.dockerPlatform
-                    ? { platform: Platform.custom(architecture.dockerPlatform) }
-                    : {}),
-                }
-              ),
-              handler: CDKHandler.FROM_IMAGE,
-              runtime: CDKRuntime.FROM_IMAGE,
-              layers: undefined,
-            }
+            description,
+            code: Code.fromAssetImage(
+              path.resolve(__dirname, "../support/bridge"),
+              {
+                ...(architecture?.dockerPlatform
+                  ? { platform: Platform.custom(architecture.dockerPlatform) }
+                  : {}),
+              }
+            ),
+            handler: CDKHandler.FROM_IMAGE,
+            runtime: CDKRuntime.FROM_IMAGE,
+            layers: undefined,
+          }
           : {
-              description,
-              runtime: CDKRuntime.NODEJS_22_X,
-              code: Code.fromAsset(
-                path.resolve(__dirname, "../support/bridge")
-              ),
-              handler: "live-lambda.handler",
-              layers: [],
-            }),
+            description,
+            runtime: CDKRuntime.NODEJS_22_X,
+            code: Code.fromAsset(
+              path.resolve(__dirname, "../support/bridge")
+            ),
+            handler: "live-lambda.handler",
+            layers: [],
+          }),
         architecture,
         functionName,
         memorySize,
@@ -998,9 +1002,8 @@ export class Function extends CDKFunction implements SSTConstruct {
       useDeferredTasks().add(async () => {
         if (app.isRunningSSTTest()) return;
         const bootstrap = await useBootstrap();
-        const bootstrapBucketArn = `arn:${Stack.of(this).partition}:s3:::${
-          bootstrap.bucket
-        }`;
+        const bootstrapBucketArn = `arn:${Stack.of(this).partition}:s3:::${bootstrap.bucket
+          }`;
         this.attachPermissions([
           new PolicyStatement({
             actions: ["iot:*"],
@@ -1021,17 +1024,17 @@ export class Function extends CDKFunction implements SSTConstruct {
         ...props,
         ...(props.runtime === "container"
           ? {
-              code: Code.fromInline("export function placeholder() {}"),
-              handler: "index.placeholder",
-              runtime: CDKRuntime.NODEJS_22_X,
-              layers: undefined,
-            }
+            code: Code.fromInline("export function placeholder() {}"),
+            handler: "index.placeholder",
+            runtime: CDKRuntime.NODEJS_22_X,
+            layers: undefined,
+          }
           : {
-              code: Code.fromInline("export function placeholder() {}"),
-              handler: "index.placeholder",
-              runtime: CDKRuntime.NODEJS_22_X,
-              layers: Function.buildLayers(scope, id, props),
-            }),
+            code: Code.fromInline("export function placeholder() {}"),
+            handler: "index.placeholder",
+            runtime: CDKRuntime.NODEJS_22_X,
+            layers: Function.buildLayers(scope, id, props),
+          }),
         architecture,
         functionName,
         memorySize,
@@ -1465,7 +1468,7 @@ export class Function extends CDKFunction implements SSTConstruct {
       if (inheritedProps && Object.keys(inheritedProps).length > 0) {
         throw new Error(
           inheritErrorMessage ||
-            `Cannot inherit default props when a Function is provided`
+          `Cannot inherit default props when a Function is provided`
         );
       }
       return definition;

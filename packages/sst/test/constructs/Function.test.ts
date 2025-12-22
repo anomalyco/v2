@@ -11,7 +11,6 @@ import {
   createApp,
   objectLike,
   ANY,
-  printResource,
   arrayWith,
 } from "./helper";
 import * as s3 from "aws-cdk-lib/aws-s3";
@@ -241,6 +240,19 @@ test("runtime: nodejs22.x", async () => {
   await app.finish();
   hasResource(stack, "AWS::Lambda::Function", {
     Runtime: "nodejs22.x",
+  });
+});
+
+test("runtime: nodejs24.x", async () => {
+  const app = await createApp();
+  const stack = new Stack(app, "stack");
+  new Function(stack, "Function", {
+    handler: "test/constructs/lambda.handler",
+    runtime: "nodejs24.x",
+  });
+  await app.finish();
+  hasResource(stack, "AWS::Lambda::Function", {
+    Runtime: "nodejs24.x",
   });
 });
 
@@ -668,8 +680,8 @@ test("bundle: commandHooks-beforeBundling success", async () => {
   new Function(stack, "Function", {
     handler: "test/lambda.handler",
     hooks: {
-      afterBuild: async () => {},
-      beforeBuild: async () => {},
+      afterBuild: async () => { },
+      beforeBuild: async () => { },
     },
   });
   countResources(stack, "AWS::Lambda::Function", 1);

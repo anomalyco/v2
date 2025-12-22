@@ -1,3 +1,15 @@
 packages:
-  - "packages/*"
-  - "www"
+  - packages/*
+  - www
+
+onlyBuiltDependencies:
+  - '@sentry/cli'
+  - '@sveltejs/kit'
+  - aws-crt
+  - aws-sdk
+  - core-js
+  - core-js-pure
+  - esbuild
+  - sharp
+  - turbo
+  - unrs-resolver

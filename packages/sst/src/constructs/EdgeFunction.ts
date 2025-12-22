@@ -58,7 +58,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export interface EdgeFunctionProps {
   bundle?: string;
   handler: string;
-  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | 'nodejs24.x';
   timeout?: number | Duration;
   memorySize?: number | Size;
   permissions?: Permissions;
@@ -237,9 +237,8 @@ export class EdgeFunction extends Construct {
     // Get handler filename
     const isESM = (nodejs?.format || "esm") === "esm";
     const parsed = path.parse(result.handler);
-    const handlerFilename = `${parsed.dir}/${parsed.name}${
-      isESM ? ".mjs" : ".cjs"
-    }`;
+    const handlerFilename = `${parsed.dir}/${parsed.name}${isESM ? ".mjs" : ".cjs"
+      }`;
     return { asset, handlerFilename };
   }
 
@@ -418,8 +417,7 @@ export class EdgeFunction extends Construct {
         ManagedPolicy.fromManagedPolicyArn(
           this,
           "EdgeLambdaPolicy",
-          `arn:${
-            Stack.of(this).partition
+          `arn:${Stack.of(this).partition
           }:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`
         ),
       ],
@@ -508,6 +506,12 @@ export class EdgeFunction extends Construct {
       }
     }
 
+    const runtimeMap: Record<string, string> = {
+      "nodejs24.x": Runtime.NODEJS_24_X.name,
+      "nodejs22.x": Runtime.NODEJS_22_X.name,
+      "nodejs20.x": Runtime.NODEJS_20_X.name,
+    };
+
     // Create custom resource
     const fn = new CustomResource(this.scope, resId, {
       serviceToken: provider.functionArn,
@@ -522,12 +526,7 @@ export class EdgeFunction extends Construct {
             S3Bucket: assetBucket,
             S3Key: assetKey,
           },
-          Runtime:
-            runtime === "nodejs22.x"
-              ? Runtime.NODEJS_22_X.name
-              : runtime === "nodejs20.x"
-              ? Runtime.NODEJS_20_X.name
-              : Runtime.NODEJS_18_X.name,
+          Runtime: runtimeMap[runtime] ?? Runtime.NODEJS_18_X.name,
           MemorySize:
             typeof memorySize === "string"
               ? toCdkSize(memorySize).toMebibytes()
