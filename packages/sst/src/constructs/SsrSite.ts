@@ -63,6 +63,7 @@ import {
   S3OriginProps,
   HttpOrigin,
   OriginGroup,
+  HttpOriginProps,
 } from "aws-cdk-lib/aws-cloudfront-origins";
 import { Rule, Schedule } from "aws-cdk-lib/aws-events";
 import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
@@ -134,6 +135,13 @@ export type OriginGroupConfig = {
   fallbackOriginName: string;
   fallbackStatusCodes?: number[];
 };
+
+export type HttpOriginConfig = {
+  type: "http";
+  domainName: string;
+  httpOriginProps?: HttpOriginProps;
+};
+
 type OriginsMap = Record<string, S3Origin | HttpOrigin | OriginGroup>;
 
 export type Plan = ReturnType<SsrSite["validatePlan"]>;
@@ -1114,6 +1122,10 @@ function handler(event) {
       return new HttpOrigin(Fn.parseDomainName(fnUrl.url));
     }
 
+    function createHttpOrigin(props: HttpOriginConfig) {
+      return new HttpOrigin(props.domainName, props.httpOriginProps);
+    }
+
     function createOrigins() {
       const origins: OriginsMap = {};
 
@@ -1128,6 +1140,9 @@ function handler(event) {
             break;
           case "image-optimization-function":
             origins[name] = createImageOptimizationFunctionOrigin(props);
+            break;
+          case "http":
+            origins[name] = createHttpOrigin(props);
             break;
         }
       });
@@ -1588,6 +1603,7 @@ function handler(event) {
       | ImageOptimizationFunctionOriginConfig
       | S3OriginConfig
       | OriginGroupConfig
+      | HttpOriginConfig
     >
   >(input: {
     cloudFrontFunctions?: CloudFrontFunctions;
