@@ -459,6 +459,12 @@ export interface SsrSiteProps {
      * from the server rendering Lambda.
      */
     responseHeadersPolicy?: IResponseHeadersPolicy;
+
+    /**
+     * Override the CloudFront origin request policy properties for responses
+     * from the server rendering Lambda.
+     */
+    originRequestPolicy?: IOriginRequestPolicy;
     /**
      * Override the CloudFront viewer protocol policy properties.
      * @default ViewerProtocolPolicy.REDIRECT_TO_HTTPS
@@ -878,6 +884,7 @@ export abstract class SsrSite extends Construct implements SSTConstruct {
           compress: true,
           cachePolicy: CachePolicy.CACHING_OPTIMIZED,
           responseHeadersPolicy: cdk?.responseHeadersPolicy,
+          originRequestPolicy: cdk?.originRequestPolicy,
           functionAssociations: cfFunction
             ? [
                 {
