@@ -14,8 +14,8 @@ type BIND_REASON =
   | "secrets_updated"
   | "iam_expired";
 
-class MetadataNotFoundError extends Error {}
-class MetadataOutdatedError extends Error {}
+class MetadataNotFoundError extends Error { }
+class MetadataOutdatedError extends Error { }
 
 export const bind = (program: Program) =>
   program
@@ -183,8 +183,8 @@ export const bind = (program: Program) =>
             const siteConfig = ssrSite
               ? await getSsrSiteMetadata()
               : staticSite
-              ? await getStaticSiteMetadata()
-              : await getServiceMetadata();
+                ? await getStaticSiteMetadata()
+                : await getServiceMetadata();
 
             // Handle rebind due to metadata updated
             if (reason === "metadata_updated") {
@@ -242,13 +242,16 @@ export const bind = (program: Program) =>
             });
           }
 
-          function stripEmptyEnvValues(envs) {
-            return Object.fromEntries(
-              Object.entries(envs).filter(
-                ([, value]) =>
-                  value !== undefined && value !== null && value !== ""
-              )
-            );
+          function stripEmptyEnvValues(
+            envs: Record<string, string | undefined | null> | undefined
+          ): Record<string, string> {
+            const result: Record<string, string> = {};
+            for (const [key, value] of Object.entries(envs ?? {})) {
+              if (value !== undefined && value !== null && value !== "") {
+                result[key] = value;
+              }
+            }
+            return result;
           }
 
           async function getSsrSiteMetadata() {
