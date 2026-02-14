@@ -17,6 +17,10 @@ export abstract class CertificateBase extends Resource implements ICertificate {
    */
   protected readonly region?: string;
 
+  public get certificateRef() {
+    return { certificateId: this.certificateArn };
+  }
+
   public metricDaysToExpiry(props?: MetricOptions): Metric {
     return new Metric({
       period: Duration.days(1),

@@ -215,13 +215,13 @@ export interface SsrSiteProps {
   memorySize?: number | Size;
   /**
    * The runtime environment for the SSR function.
-   * @default nodejs22.x
+   * @default nodejs24.x
    * @example
    * ```js
    * runtime: "nodejs20.x",
    * ```
    */
-  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x" | "nodejs24.x";
   /**
    * Used to configure nodejs function properties
    */
@@ -772,7 +772,7 @@ export abstract class SsrSite extends Construct implements SSTConstruct {
         code: Code.fromAsset(
           plan.warmer?.function ?? path.join(__dirname, "../support/ssr-warmer")
         ),
-        runtime: Runtime.NODEJS_22_X,
+        runtime: Runtime.NODEJS_24_X,
         handler: "index.handler",
         timeout: CdkDuration.minutes(15),
         memorySize: 128,

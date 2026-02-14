@@ -5,8 +5,8 @@ export default [
   install({
     packages: [
       "sst@^2",
-      "aws-cdk-lib@2.201.0",
-      "constructs@10.3.0",
+      "aws-cdk-lib@2.238.0",
+      "constructs@10.4.5",
       "astro-sst",
     ],
     dev: true,
