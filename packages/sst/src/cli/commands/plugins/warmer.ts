@@ -8,7 +8,7 @@ import { useAWSClient } from "../../../credentials.js";
 import { lazy } from "../../../util/lazy.js";
 
 export const useRDSWarmer = lazy(async () => {
-  let interval: NodeJS.Timer;
+  let interval: ReturnType<typeof setInterval>;
   const bus = useBus();
   const client = useAWSClient(RDSDataClient);
   bus.subscribe("stacks.metadata", (evt) => {

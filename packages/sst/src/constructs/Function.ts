@@ -72,6 +72,7 @@ const supportedRuntimes = {
   "nodejs18.x": CDKRuntime.NODEJS_18_X,
   "nodejs20.x": CDKRuntime.NODEJS_20_X,
   "nodejs22.x": CDKRuntime.NODEJS_22_X,
+  "nodejs24.x": CDKRuntime.NODEJS_24_X,
   "python3.7": CDKRuntime.PYTHON_3_7,
   "python3.8": CDKRuntime.PYTHON_3_8,
   "python3.9": CDKRuntime.PYTHON_3_9,
@@ -227,7 +228,7 @@ export interface FunctionProps
   handler?: string;
   /**
    * The runtime environment for the function.
-   * @default "nodejs22.x"
+   * @default "nodejs24.x"
    * @example
    * ```js
    * new Function(stack, "Function", {
@@ -879,7 +880,7 @@ export class Function extends CDKFunction implements SSTConstruct {
       .forEach((per) => {
         props = Function.mergeProps(per, props);
       });
-    props.runtime = props.runtime || "nodejs22.x";
+    props.runtime = props.runtime || "nodejs24.x";
     if (props.runtime === "go1.x") useWarning().add("go.deprecated");
 
     // Set defaults
@@ -921,7 +922,7 @@ export class Function extends CDKFunction implements SSTConstruct {
         code: Code.fromInline("export function placeholder() {}"),
         handler: "index.placeholder",
         functionName,
-        runtime: CDKRuntime.NODEJS_22_X,
+        runtime: CDKRuntime.NODEJS_24_X,
         memorySize,
         ephemeralStorageSize: diskSize,
         timeout,
@@ -975,7 +976,7 @@ export class Function extends CDKFunction implements SSTConstruct {
             }
           : {
               description,
-              runtime: CDKRuntime.NODEJS_22_X,
+              runtime: CDKRuntime.NODEJS_24_X,
               code: Code.fromAsset(
                 path.resolve(__dirname, "../support/bridge")
               ),
@@ -1023,13 +1024,13 @@ export class Function extends CDKFunction implements SSTConstruct {
           ? {
               code: Code.fromInline("export function placeholder() {}"),
               handler: "index.placeholder",
-              runtime: CDKRuntime.NODEJS_22_X,
+              runtime: CDKRuntime.NODEJS_24_X,
               layers: undefined,
             }
           : {
               code: Code.fromInline("export function placeholder() {}"),
               handler: "index.placeholder",
-              runtime: CDKRuntime.NODEJS_22_X,
+              runtime: CDKRuntime.NODEJS_24_X,
               layers: Function.buildLayers(scope, id, props),
             }),
         architecture,

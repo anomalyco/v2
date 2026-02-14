@@ -46,7 +46,6 @@ telemetry(program);
 types(program);
 
 if ("setSourceMapsEnabled" in process) {
-  // @ts-expect-error
   process.setSourceMapsEnabled(true);
 }
 process.removeAllListeners("uncaughtException");

@@ -587,7 +587,7 @@ export class RDS extends Construct implements SSTConstruct {
     // Create custom resource handler
     const handler = new Function(this, "MigrationHandler", {
       code: Code.fromAsset(path.join(__dirname, "../support/script-function")),
-      runtime: Runtime.NODEJS_22_X,
+      runtime: Runtime.NODEJS_24_X,
       handler: "index.handler",
       timeout: CDKDuration.minutes(15),
       memorySize: 1024,

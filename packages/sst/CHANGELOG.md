@@ -1,5 +1,15 @@
 # @serverless-stack/cli2
 
+## 2.49.8
+
+### Patch Changes
+
+- [`7eb36d2e3bb517cb209b9f96900a75b7ceafcc46`](https://github.com/sst/v2/commit/7eb36d2e3bb517cb209b9f96900a75b7ceafcc46) - Upgrade to Node.js 24 support
+
+- [`7eb36d2e3bb517cb209b9f96900a75b7ceafcc46`](https://github.com/sst/v2/commit/7eb36d2e3bb517cb209b9f96900a75b7ceafcc46) - Bump CDK and constructs to latest versions
+
+- [`7eb36d2e3bb517cb209b9f96900a75b7ceafcc46`](https://github.com/sst/v2/commit/7eb36d2e3bb517cb209b9f96900a75b7ceafcc46) - Fix type check errors for Node 24 and TypeScript 5.9 compatibility
+
 ## 2.49.7
 
 ### Patch Changes

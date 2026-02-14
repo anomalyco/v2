@@ -379,7 +379,7 @@ export class NextjsSite extends SsrSite {
             description: "Next.js Image Optimization Function",
             handler: imageOpt.handler,
             code: Code.fromAsset(path.join(sitePath, imageOpt.bundle)),
-            runtime: Runtime.NODEJS_22_X,
+            runtime: Runtime.NODEJS_24_X,
             architecture: Architecture.ARM_64,
             environment: {
               BUCKET_NAME: bucket.bucketName,
@@ -414,7 +414,7 @@ export class NextjsSite extends SsrSite {
           pattern: behavior.pattern === "*" ? undefined : behavior.pattern,
           origin: behavior.origin!,
           cacheType: behavior.origin === "s3" ? "static" : "server",
-          cfFunction: "serverCfFunction",
+          cfFunction: "serverCfFunction" as const,
           edgeFunction: behavior.edgeFunction ?? "",
         };
       }),
@@ -467,7 +467,7 @@ export class NextjsSite extends SsrSite {
       code: Code.fromAsset(
         path.join(this.props.path, ".open-next", "revalidation-function")
       ),
-      runtime: Runtime.NODEJS_22_X,
+      runtime: Runtime.NODEJS_24_X,
       timeout: CdkDuration.seconds(30),
       ...cdk?.revalidation,
     });
@@ -524,7 +524,7 @@ export class NextjsSite extends SsrSite {
         description: "Next.js revalidation data insert",
         handler: "index.handler",
         code: Code.fromAsset(dynamodbProviderPath),
-        runtime: Runtime.NODEJS_22_X,
+        runtime: Runtime.NODEJS_24_X,
         timeout: CdkDuration.minutes(15),
         memorySize: Math.min(
           10240,

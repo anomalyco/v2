@@ -156,6 +156,7 @@ export interface JobProps {
     | "nodejs18.x"
     | "nodejs20.x"
     | "nodejs22.x"
+    | "nodejs24.x"
     | "container";
   /**
    * For "nodejs" runtime, point to the entry point and handler function.
@@ -651,6 +652,7 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18.2023.12.14.13",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20.2023.12.14.13",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22.2024.11.22.14",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24.2025.11.22.14",
         },
         x86_64: {
           nodejs: "amazon/aws-lambda-nodejs:16",
@@ -658,6 +660,7 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24",
         },
       };
       const image = LinuxBuildImage.fromDockerRegistry(
@@ -700,7 +703,7 @@ export class Job extends Construct implements SSTConstruct {
     return new CdkFunction(this, "Manager", {
       code: Code.fromAsset(path.join(__dirname, "../support/job-manager/")),
       handler: "index.handler",
-      runtime: Runtime.NODEJS_22_X,
+      runtime: Runtime.NODEJS_24_X,
       timeout: CdkDuration.seconds(10),
       memorySize: 1024,
       environment: {

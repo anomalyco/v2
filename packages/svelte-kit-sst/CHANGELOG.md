@@ -1,5 +1,11 @@
 # svelte-kit-sst
 
+## 2.49.8
+
+### Patch Changes
+
+- [`7eb36d2e3bb517cb209b9f96900a75b7ceafcc46`](https://github.com/sst/v2/commit/7eb36d2e3bb517cb209b9f96900a75b7ceafcc46) - Fix Buffer type in Request body for TypeScript 5.9 compatibility
+
 ## 2.49.7
 
 ## 2.49.6

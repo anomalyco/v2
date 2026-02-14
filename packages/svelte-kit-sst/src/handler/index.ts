@@ -55,7 +55,7 @@ export async function handler(
     headers: internalEvent.headers,
     body: ["GET", "HEAD"].includes(internalEvent.method)
       ? undefined
-      : internalEvent.body,
+      : Uint8Array.from(internalEvent.body),
   };
   debug("request", requestUrl, requestProps);
   const request = new Request(requestUrl, requestProps);

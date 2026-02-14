@@ -249,7 +249,7 @@ export class Script extends Construct implements SSTConstruct {
   private createCustomResourceFunction(): CdkFunction {
     const handler = new CdkFunction(this, "ScriptHandler", {
       code: Code.fromAsset(path.join(__dirname, "../support/script-function")),
-      runtime: Runtime.NODEJS_22_X,
+      runtime: Runtime.NODEJS_24_X,
       handler: "index.handler",
       timeout: Duration.minutes(15),
       memorySize: 1024,
