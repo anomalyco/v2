@@ -127,7 +127,12 @@ export interface NextjsSiteProps {
        * })
        *```
        */
-      runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+      runtime?:
+        | "nodejs16.x"
+        | "nodejs18.x"
+        | "nodejs20.x"
+        | "nodejs22.x"
+        | "nodejs24.x";
     };
   };
   /**
@@ -1490,6 +1495,9 @@ export class NextjsSite extends Construct implements SSTConstruct {
   }
 
   private normalizeRuntime(runtime?: string): lambda.Runtime {
+    if (runtime === "nodejs24.x") {
+      return lambda.Runtime.NODEJS_24_X;
+    }
     if (runtime === "nodejs22.x") {
       return lambda.Runtime.NODEJS_22_X;
     }

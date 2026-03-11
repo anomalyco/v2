@@ -274,16 +274,16 @@ importers:
     dependencies:
       '@aws-cdk/aws-lambda-python-alpha':
         specifier: 2.201.0-alpha.0
-        version: 2.201.0-alpha.0(aws-cdk-lib@2.201.0(constructs@10.3.0))(constructs@10.3.0)
+        version: 2.201.0-alpha.0(aws-cdk-lib@2.224.0(constructs@10.3.0))(constructs@10.3.0)
       '@aws-cdk/cloud-assembly-schema':
-        specifier: 44.5.0
-        version: 44.5.0
+        specifier: 48.0.0
+        version: 48.0.0
       '@aws-cdk/cloudformation-diff':
         specifier: 2.182.0
         version: 2.182.0(@aws-sdk/client-cloudformation@3.699.0(aws-crt@1.27.1))
       '@aws-cdk/cx-api':
         specifier: 2.201.0
-        version: 2.201.0(@aws-cdk/cloud-assembly-schema@44.5.0)
+        version: 2.201.0(@aws-cdk/cloud-assembly-schema@48.0.0)
       '@aws-cdk/toolkit-lib':
         specifier: 1.1.1
         version: 1.1.1(@aws-cdk/cli-plugin-contract@2.181.0)(@aws-sdk/client-sso-oidc@3.699.0(@aws-sdk/client-sts@3.699.0(aws-crt@1.27.1))(aws-crt@1.27.1))(aws-crt@1.27.1)
@@ -360,8 +360,8 @@ importers:
         specifier: 0.5.14
         version: 0.5.14
       aws-cdk-lib:
-        specifier: 2.201.0
-        version: 2.201.0(constructs@10.3.0)
+        specifier: 2.224.0
+        version: 2.224.0(constructs@10.3.0)
       aws-iot-device-sdk:
         specifier: ^2.2.13
         version: 2.2.15
@@ -752,8 +752,8 @@ packages:
     resolution: {integrity: sha512-+/Wruju2Ho99z0jI8zxMFGBkKKG97RzR/srSaColejUDrczkAjR3HjULKTVfDdIpvtvFZLyl7OMBmHKQazfeZg==}
     deprecated: This package is not used by Astro any more and is no longer maintained. In Astro 3.0 polyfills are part of a core module.
 
-  '@aws-cdk/asset-awscli-v1@2.2.237':
-    resolution: {integrity: sha512-OlXylbXI52lboFVJBFLae+WB99qWmI121x/wXQHEMj2RaVNVbWE+OAHcDk2Um1BitUQCaTf9ki57B0Fuqx0Rvw==}
+  '@aws-cdk/asset-awscli-v1@2.2.242':
+    resolution: {integrity: sha512-4c1bAy2ISzcdKXYS1k4HYZsNrgiwbiDzj36ybwFVxEWZXVAP0dimQTCaB9fxu7sWzEjw3d+eaw6Fon+QTfTIpQ==}
 
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0':
     resolution: {integrity: sha512-7bY3J8GCVxLupn/kNmpPc5VJz8grx+4RKfnnJiO1LG+uxkZfANZG3RMHhE+qQxxwkyQ9/MfPtTpf748UhR425A==}
@@ -772,8 +772,15 @@ packages:
     resolution: {integrity: sha512-f678+hMvFVVWGxoyGEtlQXpUct6DfB1foc/fuk7N5qBconhvajhAsLUeFBYXVrNd7an2LfSw5AEah2X0Vz6abw==}
     engines: {node: '>= 18.0.0'}
 
-  '@aws-cdk/cloud-assembly-schema@44.5.0':
-    resolution: {integrity: sha512-/dk9YtqF+BnBS6k4m7YWIp7Pd80m7jdjT8ED8gb3Rd9hAuAEUoJubO0M3EOlLFmknIesQNm95LYU6vt/MIQhWg==}
+  '@aws-cdk/cloud-assembly-schema@48.0.0':
+    resolution: {integrity: sha512-kHXN2Qqukf4usmKLCIdqXlG/zKakHh/q36dZYjCkrzEvmsNgKwkcZSZxu33GV2j16AQl67Qz30a1KRJ2DBwocg==}
+    engines: {node: '>= 18.0.0'}
+    bundledDependencies:
+      - jsonschema
+      - semver
+
+  '@aws-cdk/cloud-assembly-schema@48.20.0':
+    resolution: {integrity: sha512-+eeiav9LY4wbF/EFuCt/vfvi/Zoxo8bf94PW5clbMraChEliq83w4TbRVy0jB9jE0v1ooFTtIjSQkowSPkfISg==}
     engines: {node: '>= 18.0.0'}
     bundledDependencies:
       - jsonschema
@@ -4871,9 +4878,9 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.201.0:
-    resolution: {integrity: sha512-0ioqzM5dkJl02uchOfgeCY3thV3jTn9YkyZ/UF5P4Hq9iNGHQqmPu5xE/VcAV7+P72Z/zV+QLV0xkVT6iLF/bw==}
-    engines: {node: '>= 14.15.0'}
+  aws-cdk-lib@2.224.0:
+    resolution: {integrity: sha512-WWc9/LOhSd+QsN2ecfy67BfYBv8B5HQOze+nufNo48Z1TrHqkSJS74JzMN592nPztzjYHjVkcjCuXLJpSzwRig==}
+    engines: {node: '>= 18.0.0'}
     peerDependencies:
       constructs: ^10.0.0
     bundledDependencies:
@@ -4899,6 +4906,7 @@ packages:
   aws-sdk@2.1692.0:
     resolution: {integrity: sha512-x511uiJ/57FIsbgUe5csJ13k3uzu25uWQE+XqfBis/sB0SFoiElJWXRkgEAUh0U6n40eT3ay5Ue4oPkRMu1LYw==}
     engines: {node: '>= 10.0.0'}
+    deprecated: The AWS SDK for JavaScript (v2) has reached end-of-support, and no longer receives updates. Please migrate your code to use AWS SDK for JavaScript (v3). More info https://a.co/cUPnyil
 
   axios@0.25.0:
     resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
@@ -6755,21 +6763,23 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.0.3:
     resolution: {integrity: sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-dirs@3.0.1:
     resolution: {integrity: sha512-NBcGGFbBA9s1VzD41QXDG+3++t9Mn5t1FpLdhESY6oKY4gYTFpX4wO3sqGUa0Srjtbfj3szX0RnemmrVRUdULA==}
@@ -8743,6 +8753,7 @@ packages:
   prebuild-install@6.1.4:
     resolution: {integrity: sha512-Z4vpywnK1lBg+zdPCVCsKq0xO66eEV9rWo2zrROGGiRS4JtueBOdlB1FnY8lcy7JsUud/Q3ijUxyWN26Ika0vQ==}
     engines: {node: '>=6'}
+    deprecated: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
     hasBin: true
 
   prepend-http@2.0.0:
@@ -9638,6 +9649,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   space-separated-tokens@1.1.5:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
@@ -10571,6 +10583,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -10922,13 +10935,13 @@ snapshots:
     dependencies:
       undici: 5.29.0
 
-  '@aws-cdk/asset-awscli-v1@2.2.237': {}
+  '@aws-cdk/asset-awscli-v1@2.2.242': {}
 
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0': {}
 
-  '@aws-cdk/aws-lambda-python-alpha@2.201.0-alpha.0(aws-cdk-lib@2.201.0(constructs@10.3.0))(constructs@10.3.0)':
+  '@aws-cdk/aws-lambda-python-alpha@2.201.0-alpha.0(aws-cdk-lib@2.224.0(constructs@10.3.0))(constructs@10.3.0)':
     dependencies:
-      aws-cdk-lib: 2.201.0(constructs@10.3.0)
+      aws-cdk-lib: 2.224.0(constructs@10.3.0)
       constructs: 10.3.0
 
   '@aws-cdk/aws-service-spec@0.1.82':
@@ -10938,7 +10951,9 @@ snapshots:
 
   '@aws-cdk/cli-plugin-contract@2.181.0': {}
 
-  '@aws-cdk/cloud-assembly-schema@44.5.0': {}
+  '@aws-cdk/cloud-assembly-schema@48.0.0': {}
+
+  '@aws-cdk/cloud-assembly-schema@48.20.0': {}
 
   '@aws-cdk/cloudformation-diff@2.182.0(@aws-sdk/client-cloudformation@3.699.0(aws-crt@1.27.1))':
     dependencies:
@@ -10951,9 +10966,9 @@ snapshots:
       string-width: 4.2.3
       table: 6.9.0
 
-  '@aws-cdk/cx-api@2.201.0(@aws-cdk/cloud-assembly-schema@44.5.0)':
+  '@aws-cdk/cx-api@2.201.0(@aws-cdk/cloud-assembly-schema@48.0.0)':
     dependencies:
-      '@aws-cdk/cloud-assembly-schema': 44.5.0
+      '@aws-cdk/cloud-assembly-schema': 48.0.0
 
   '@aws-cdk/service-spec-types@0.0.145':
     dependencies:
@@ -10966,9 +10981,9 @@ snapshots:
   '@aws-cdk/toolkit-lib@1.1.1(@aws-cdk/cli-plugin-contract@2.181.0)(@aws-sdk/client-sso-oidc@3.699.0(@aws-sdk/client-sts@3.699.0(aws-crt@1.27.1))(aws-crt@1.27.1))(aws-crt@1.27.1)':
     dependencies:
       '@aws-cdk/cli-plugin-contract': 2.181.0
-      '@aws-cdk/cloud-assembly-schema': 44.5.0
+      '@aws-cdk/cloud-assembly-schema': 48.0.0
       '@aws-cdk/cloudformation-diff': 2.182.0(@aws-sdk/client-cloudformation@3.699.0(aws-crt@1.27.1))
-      '@aws-cdk/cx-api': 2.201.0(@aws-cdk/cloud-assembly-schema@44.5.0)
+      '@aws-cdk/cx-api': 2.201.0(@aws-cdk/cloud-assembly-schema@48.0.0)
       '@aws-sdk/client-appsync': 3.830.0(aws-crt@1.27.1)
       '@aws-sdk/client-cloudcontrol': 3.830.0(aws-crt@1.27.1)
       '@aws-sdk/client-cloudformation': 3.699.0(aws-crt@1.27.1)
@@ -19331,11 +19346,11 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  aws-cdk-lib@2.201.0(constructs@10.3.0):
+  aws-cdk-lib@2.224.0(constructs@10.3.0):
     dependencies:
-      '@aws-cdk/asset-awscli-v1': 2.2.237
+      '@aws-cdk/asset-awscli-v1': 2.2.242
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.0
-      '@aws-cdk/cloud-assembly-schema': 44.5.0
+      '@aws-cdk/cloud-assembly-schema': 48.20.0
       constructs: 10.3.0
 
   aws-crt@1.27.1:
@@ -19740,8 +19755,8 @@ snapshots:
 
   cdk-assets@3.3.1(@aws-sdk/client-sso-oidc@3.699.0(@aws-sdk/client-sts@3.699.0(aws-crt@1.27.1))(aws-crt@1.27.1))(aws-crt@1.27.1):
     dependencies:
-      '@aws-cdk/cloud-assembly-schema': 44.5.0
-      '@aws-cdk/cx-api': 2.201.0(@aws-cdk/cloud-assembly-schema@44.5.0)
+      '@aws-cdk/cloud-assembly-schema': 48.0.0
+      '@aws-cdk/cx-api': 2.201.0(@aws-cdk/cloud-assembly-schema@48.0.0)
       '@aws-sdk/client-ecr': 3.830.0(aws-crt@1.27.1)
       '@aws-sdk/client-s3': 3.699.0(aws-crt@1.27.1)
       '@aws-sdk/client-secrets-manager': 3.830.0(aws-crt@1.27.1)
