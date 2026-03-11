@@ -108,7 +108,7 @@ export class EdgeFunction extends Construct {
     this.scope = props.scopeOverride || this;
 
     this.props = {
-      runtime: "nodejs18.x",
+      runtime: "nodejs24.x",
       timeout: 10,
       memorySize: 1024,
       ...props,

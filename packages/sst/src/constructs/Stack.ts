@@ -95,7 +95,7 @@ export class Stack extends CDKStack {
    * ```js
    * stack.setDefaultFunctionProps({
    *   srcPath: "backend",
-   *   runtime: "nodejs18.x",
+   *   runtime: "nodejs24.x",
    * });
    * ```
    */

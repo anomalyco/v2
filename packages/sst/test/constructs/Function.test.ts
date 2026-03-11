@@ -70,6 +70,18 @@ test("constructor: props with minimum config", async () => {
   countResources(stack, "AWS::Lambda::EventInvokeConfig", 0);
 });
 
+test("constructor: default runtime", async () => {
+  const app = await createApp();
+  const stack = new Stack(app, "stack");
+  new Function(stack, "Function", {
+    handler: "test/constructs/lambda.handler",
+  });
+  await app.finish();
+  hasResource(stack, "AWS::Lambda::Function", {
+    Runtime: "nodejs24.x",
+  });
+});
+
 test("constructor: props with full config", async () => {
   const stack = new Stack(await createApp(), "stack");
   new Function(stack, "Function", {

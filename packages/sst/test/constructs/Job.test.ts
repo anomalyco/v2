@@ -52,7 +52,7 @@ test("constructor: default", async () => {
           Value: "/test/test/",
         }),
       ],
-      Image: "amazon/aws-lambda-nodejs:18",
+      Image: "amazon/aws-lambda-nodejs:24",
       Type: "LINUX_CONTAINER",
     },
     TimeoutInMinutes: 480,

@@ -141,7 +141,7 @@ export interface JobProps {
   architecture?: "x86_64" | "arm_64";
   /**
    * The runtime environment for the job.
-   * @default "nodejs18.x"
+   * @default "nodejs24.x"
    * @example
    * ```js
    * new Job(stack, "MyJob", {
@@ -665,7 +665,7 @@ export class Job extends Construct implements SSTConstruct {
       };
       const image = LinuxBuildImage.fromDockerRegistry(
         // ARM images can be found here https://hub.docker.com/r/amazon/aws-lambda-nodejs
-        dockerImageMap[architecture ?? "x86_64"][runtime ?? "nodejs18.x"]
+        dockerImageMap[architecture ?? "x86_64"][runtime ?? "nodejs24.x"]
       );
       project.environment = {
         ...project.environment,
@@ -804,6 +804,6 @@ export class Job extends Construct implements SSTConstruct {
 
   private convertJobRuntimeToFunctionRuntime() {
     const { runtime } = this.props;
-    return runtime === "container" ? "container" : "nodejs18.x";
+    return runtime === "container" ? "container" : "nodejs24.x";
   }
 }

@@ -1253,7 +1253,7 @@ function handler(event) {
         singletonUrlSigner ??
         new EdgeFunction(self, "ServerUrlSigningFunction", {
           bundle: path.join(__dirname, "../support/signing-function"),
-          runtime: "nodejs18.x",
+          runtime: "nodejs24.x",
           handler: "index.handler",
           timeout: 10,
           memorySize: 128,
