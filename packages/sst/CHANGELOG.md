@@ -1,5 +1,11 @@
 # @serverless-stack/cli2
 
+## 2.49.8
+
+### Patch Changes
+
+- [#133](https://github.com/anomalyco/v2/pull/133) [`c8f259fe20e5674e5d52b298ba5017e3adee47e9`](https://github.com/anomalyco/v2/commit/c8f259fe20e5674e5d52b298ba5017e3adee47e9) Thanks [@vimtor](https://github.com/vimtor)! - Add support for the `nodejs24.x` Lambda runtime.
+
 ## 2.49.7
 
 ### Patch Changes
