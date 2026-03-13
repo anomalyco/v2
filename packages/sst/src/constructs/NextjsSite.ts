@@ -272,7 +272,7 @@ export class NextjsSite extends SsrSite {
         ...baseServerConfig,
         handler: fn.handler,
         bundle: path.join(sitePath, fn.bundle),
-        runtime: this.props.runtime ?? ("nodejs18.x" as const),
+        runtime: this.props.runtime ?? ("nodejs22.x" as const),
         architecture: Architecture.ARM_64,
         memorySize: this.props.memorySize ?? 1536,
         environment: {
