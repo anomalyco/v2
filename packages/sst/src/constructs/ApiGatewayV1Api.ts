@@ -431,7 +431,7 @@ export interface ApiGatewayV1ApiLambdaRequestAuthorizer
     /**
      * This allows you to override the default settings this construct uses internally to create the authorizer.
      */
-    authorizer?: apig.TokenAuthorizer;
+    authorizer?: apig.RequestAuthorizer;
   };
 }
 
