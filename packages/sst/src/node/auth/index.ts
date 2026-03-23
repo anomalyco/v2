@@ -9,6 +9,7 @@ export * from "./adapter/github.js";
 export * from "./adapter/oidc.js";
 export * from "./adapter/oauth.js";
 export * from "./adapter/link.js";
+export * from "./adapter/openauth.js";
 
 import { createProxy } from "../util/index.js";
 

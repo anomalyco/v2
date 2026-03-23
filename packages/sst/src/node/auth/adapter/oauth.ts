@@ -1,5 +1,5 @@
 import { APIGatewayProxyStructuredResultV2 } from "aws-lambda";
-import { BaseClient, generators, Issuer, TokenSet } from "openid-client";
+import { BaseClient, ClientMetadata, generators, Issuer, TokenSet } from "openid-client";
 import {
   useCookie,
   useDomainName,
@@ -22,6 +22,10 @@ export interface OauthBasicConfig {
    */
   scope: string;
   prompt?: string;
+  /**
+   * Additional auth client metadata
+   */
+  clientMetadata?: Partial<ClientMetadata>
   /**
    * onSuccess callback when the oauth flow is successful. Will provide tokenset
    */
@@ -48,6 +52,7 @@ export const OauthAdapter = /* @__PURE__ */ createAdapter(
         client_secret: config.clientSecret,
         redirect_uris: [callback],
         response_types: ["code"],
+        ...config.clientMetadata,
       });
 
       if (step === "authorize" || step === "connect") {
