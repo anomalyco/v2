@@ -18,6 +18,24 @@ declare module "../bus.js" {
   }
 }
 
+/**
+ * This function is used to remove workspace dependencies from the dependencies
+ * object. This is because esbuild must not mark them as external, otherwise
+ * the bundling will fail.
+ */
+function exceptWorkspaceDependencies(
+  deps: Record<string, string>
+): Record<string, string> {
+  let result: Record<string, string> = {};
+  for (const key of Object.keys(deps)) {
+    let version = deps[key];
+    if (!version.startsWith("workspace:")) {
+      result[key] = version;
+    }
+  }
+  return result;
+}
+
 export async function load(input: string, shallow?: boolean) {
   const parsed = path.parse(input);
   const root = await findAbove(input, "package.json");
@@ -48,11 +66,13 @@ export async function load(input: string, shallow?: boolean) {
       external: [
         "aws-cdk-lib",
         "sst",
-        ...Object.keys({
+        // workspace dependencies must be internal
+        // because they haven't been built yet
+        ...Object.keys(exceptWorkspaceDependencies({
           ...pkg.devDependencies,
           ...pkg.dependencies,
           ...pkg.peerDependencies,
-        }),
+        })),
       ],
       plugins: [
         {

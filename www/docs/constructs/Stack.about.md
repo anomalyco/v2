@@ -1,5 +1,7 @@
 The Stack construct extends cdk.Stack. It automatically prefixes the stack names with the stage and app name to ensure that they can be deployed to multiple regions in the same AWS account. It also ensure that the stack uses the same AWS profile and region as the app. They're defined using functions that return resources that can be imported by other stacks.
 
+When the stack construct is built in a monorepo, any packages marked as `workspace` in package.json will be included in the build. All other packages are marked as external and must be pre-built.
+
 ## Examples
 
 ### Creating a new stack
