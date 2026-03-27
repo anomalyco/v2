@@ -4,7 +4,7 @@ export default [
   extend("presets/base/monorepo"),
   extract(),
   install({
-    packages: ["@types/node", "@types/aws-lambda", "vitest", "sst"],
+    packages: ["@types/node", "@types/aws-lambda", "vitest", "sst@^2"],
     path: "packages/functions",
     dev: true,
   }),
