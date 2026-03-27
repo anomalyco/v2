@@ -251,7 +251,7 @@ export const useNodeHandler = (): RuntimeHandler => {
             path.join(input.out, "package.json"),
             JSON.stringify({
               dependencies: Object.fromEntries(
-                installPackages.map((x) => [x, json.dependencies?.[x] || "*"])
+                installPackages.map((x) => [x, json.dependencies?.[x] || json.optionalDependencies?.[x] || "*"])
               ),
             })
           );
