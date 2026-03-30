@@ -19,9 +19,10 @@ jobs:
 
       - name: Setup Node.js
         # https://github.com/actions/setup-node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          registry-url: "https://registry.npmjs.org"
 
       - uses: pnpm/action-setup@v2
         with:
@@ -58,7 +59,7 @@ jobs:
           publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: View outputs
         run: |
@@ -71,7 +72,7 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           node ./.changeset/aggregate.mjs
 

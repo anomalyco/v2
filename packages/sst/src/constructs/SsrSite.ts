@@ -221,7 +221,12 @@ export interface SsrSiteProps {
    * runtime: "nodejs20.x",
    * ```
    */
-  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+  runtime?:
+    | "nodejs16.x"
+    | "nodejs18.x"
+    | "nodejs20.x"
+    | "nodejs22.x"
+    | "nodejs24.x";
   /**
    * Used to configure nodejs function properties
    */
@@ -1248,7 +1253,7 @@ function handler(event) {
         singletonUrlSigner ??
         new EdgeFunction(self, "ServerUrlSigningFunction", {
           bundle: path.join(__dirname, "../support/signing-function"),
-          runtime: "nodejs18.x",
+          runtime: "nodejs24.x",
           handler: "index.handler",
           timeout: 10,
           memorySize: 128,

@@ -52,7 +52,7 @@ test("constructor: default", async () => {
           Value: "/test/test/",
         }),
       ],
-      Image: "amazon/aws-lambda-nodejs:18",
+      Image: "amazon/aws-lambda-nodejs:24",
       Type: "LINUX_CONTAINER",
     },
     TimeoutInMinutes: 480,
@@ -136,6 +136,18 @@ test("runtime: nodejs22.x", async () => {
   hasResource(stack, "AWS::CodeBuild::Project", {
     Environment: objectLike({
       Image: "amazon/aws-lambda-nodejs:22",
+    }),
+  });
+});
+
+test("runtime: nodejs24.x", async () => {
+  const { stack } = await createJob({
+    runtime: "nodejs24.x",
+    timeout: "1 hour",
+  });
+  hasResource(stack, "AWS::CodeBuild::Project", {
+    Environment: objectLike({
+      Image: "amazon/aws-lambda-nodejs:24",
     }),
   });
 });

@@ -58,7 +58,12 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export interface EdgeFunctionProps {
   bundle?: string;
   handler: string;
-  runtime?: "nodejs16.x" | "nodejs18.x" | "nodejs20.x" | "nodejs22.x";
+  runtime?:
+    | "nodejs16.x"
+    | "nodejs18.x"
+    | "nodejs20.x"
+    | "nodejs22.x"
+    | "nodejs24.x";
   timeout?: number | Duration;
   memorySize?: number | Size;
   permissions?: Permissions;
@@ -103,7 +108,7 @@ export class EdgeFunction extends Construct {
     this.scope = props.scopeOverride || this;
 
     this.props = {
-      runtime: "nodejs18.x",
+      runtime: "nodejs24.x",
       timeout: 10,
       memorySize: 1024,
       ...props,
@@ -523,7 +528,9 @@ export class EdgeFunction extends Construct {
             S3Key: assetKey,
           },
           Runtime:
-            runtime === "nodejs22.x"
+            runtime === "nodejs24.x"
+              ? Runtime.NODEJS_24_X.name
+              : runtime === "nodejs22.x"
               ? Runtime.NODEJS_22_X.name
               : runtime === "nodejs20.x"
               ? Runtime.NODEJS_20_X.name

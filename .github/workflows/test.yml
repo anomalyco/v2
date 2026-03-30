@@ -47,6 +47,11 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+
       - name: Test
         run: pnpm test
         working-directory: packages/sst

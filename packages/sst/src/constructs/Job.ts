@@ -141,7 +141,7 @@ export interface JobProps {
   architecture?: "x86_64" | "arm_64";
   /**
    * The runtime environment for the job.
-   * @default "nodejs18.x"
+   * @default "nodejs24.x"
    * @example
    * ```js
    * new Job(stack, "MyJob", {
@@ -156,6 +156,7 @@ export interface JobProps {
     | "nodejs18.x"
     | "nodejs20.x"
     | "nodejs22.x"
+    | "nodejs24.x"
     | "container";
   /**
    * For "nodejs" runtime, point to the entry point and handler function.
@@ -651,6 +652,7 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18.2023.12.14.13",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20.2023.12.14.13",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22.2024.11.22.14",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24.2025.12.21.13",
         },
         x86_64: {
           nodejs: "amazon/aws-lambda-nodejs:16",
@@ -658,11 +660,12 @@ export class Job extends Construct implements SSTConstruct {
           "nodejs18.x": "amazon/aws-lambda-nodejs:18",
           "nodejs20.x": "amazon/aws-lambda-nodejs:20",
           "nodejs22.x": "amazon/aws-lambda-nodejs:22",
+          "nodejs24.x": "amazon/aws-lambda-nodejs:24",
         },
       };
       const image = LinuxBuildImage.fromDockerRegistry(
         // ARM images can be found here https://hub.docker.com/r/amazon/aws-lambda-nodejs
-        dockerImageMap[architecture ?? "x86_64"][runtime ?? "nodejs18.x"]
+        dockerImageMap[architecture ?? "x86_64"][runtime ?? "nodejs24.x"]
       );
       project.environment = {
         ...project.environment,
@@ -801,6 +804,6 @@ export class Job extends Construct implements SSTConstruct {
 
   private convertJobRuntimeToFunctionRuntime() {
     const { runtime } = this.props;
-    return runtime === "container" ? "container" : "nodejs18.x";
+    return runtime === "container" ? "container" : "nodejs24.x";
   }
 }

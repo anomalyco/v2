@@ -5,7 +5,7 @@
   },
   "sideEffects": false,
   "name": "sst",
-  "version": "2.49.6",
+  "version": "2.49.8",
   "bin": {
     "sst": "cli/sst.js"
   },
@@ -36,7 +36,7 @@
   "homepage": "https://sst.dev",
   "dependencies": {
     "@aws-cdk/aws-lambda-python-alpha": "2.201.0-alpha.0",
-    "@aws-cdk/cloud-assembly-schema": "44.5.0",
+    "@aws-cdk/cloud-assembly-schema": "48.0.0",
     "@aws-cdk/cloudformation-diff": "2.182.0",
     "@aws-cdk/cx-api": "2.201.0",
     "@aws-cdk/toolkit-lib": "1.1.1",
@@ -64,7 +64,7 @@
     "@smithy/signature-v4": "2.0.16",
     "@trpc/server": "9.18.0",
     "adm-zip": "0.5.14",
-    "aws-cdk-lib": "2.201.0",
+    "aws-cdk-lib": "2.224.0",
     "aws-iot-device-sdk": "^2.2.13",
     "aws-sdk": "^2.1501.0",
     "builtin-modules": "3.2.0",
