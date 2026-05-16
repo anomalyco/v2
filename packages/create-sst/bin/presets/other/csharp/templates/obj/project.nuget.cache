@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ez9mJX5dJ5k=",
+  "success": true,
+  "projectFilePath": "/home/runner/work/sst-v2/sst-v2/packages/create-sst/bin/presets/other/csharp/templates/Api.csproj",
+  "expectedPackageFiles": [
+    "/tmp/codeql-scratch-4d3c540b6cc19fdf/dbs/csharp/working/packages/amazon.lambda.apigatewayevents/2.4.0/amazon.lambda.apigatewayevents.2.4.0.nupkg.sha512",
+    "/tmp/codeql-scratch-4d3c540b6cc19fdf/dbs/csharp/working/packages/amazon.lambda.core/2.0.0/amazon.lambda.core.2.0.0.nupkg.sha512",
+    "/tmp/codeql-scratch-4d3c540b6cc19fdf/dbs/csharp/working/packages/amazon.lambda.serialization.systemtextjson/2.1.0/amazon.lambda.serialization.systemtextjson.2.1.0.nupkg.sha512",
+    "/tmp/codeql-scratch-4d3c540b6cc19fdf/dbs/csharp/working/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/tmp/codeql-scratch-4d3c540b6cc19fdf/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}
