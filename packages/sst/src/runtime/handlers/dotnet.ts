@@ -15,6 +15,7 @@ const FRAMEWORK_MAP: Record<string, string> = {
   "dotnetcore3.1": "netcoreapp3.1",
   dotnet6: "net6.0",
   dotnet8: "net8.0",
+  dotnet10: "net10.0",
 };
 
 const BOOTSTRAP_MAP: Record<string, string> = {
@@ -24,6 +25,7 @@ const BOOTSTRAP_MAP: Record<string, string> = {
   "dotnetcore3.1": "dotnet31-bootstrap",
   dotnet6: "dotnet6-bootstrap",
   dotnet8: "dotnet8-bootstrap",
+  dotnet10: "dotnet10-bootstrap",
 };
 
 export const useDotnetHandler = (): RuntimeHandler => {
