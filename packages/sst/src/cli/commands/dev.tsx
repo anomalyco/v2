@@ -222,7 +222,7 @@ export const dev = (program: Program) =>
                 increaseTimeout: args["increase-timeout"],
                 scriptVersion,
                 fn: project.stacks,
-                outDir: `.sst/cdk.out`,
+                buildDir: `.sst/cdk.out`,
                 mode: "dev",
               });
 

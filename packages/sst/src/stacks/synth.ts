@@ -10,7 +10,6 @@ import { Configuration } from "../util/user-configuration.js";
 
 interface SynthOptions {
   buildDir?: string;
-  outDir?: string;
   increaseTimeout?: boolean;
   scriptVersion?: string;
   mode: App["mode"];
