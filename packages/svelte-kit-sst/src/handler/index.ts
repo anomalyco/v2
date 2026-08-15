@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { installPolyfills } from "@sveltejs/kit/node/polyfills";
-import type { Server as ServerType } from "@sveltejs/kit/types";
+import type { Server as ServerType } from "@sveltejs/kit";
 // @ts-ignore
 import { Server } from "../index.js";
 // @ts-ignore
@@ -16,8 +15,6 @@ import type {
 import { InternalEvent, convertFrom, convertTo } from "./event-mapper.js";
 import { debug } from "./logger.js";
 import { isBinaryContentType } from "./binary.js";
-
-installPolyfills();
 
 const app: ServerType = new Server(manifest);
 await app.init({ env: process.env as Record<string, string> });
