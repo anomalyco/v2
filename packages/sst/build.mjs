@@ -163,6 +163,7 @@ await Promise.all(
     "dotnet31-bootstrap",
     "dotnet6-bootstrap",
     "dotnet8-bootstrap",
+    "dotnet10-bootstrap",
     "nixpacks",
     "service-dev-function",
   ].map((dir) =>
