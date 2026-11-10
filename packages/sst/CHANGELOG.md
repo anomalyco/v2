@@ -1,5 +1,11 @@
 # @serverless-stack/cli2
 
+## 2.49.9
+
+### Patch Changes
+
+- [#135](https://github.com/anomalyco/v2/pull/135) [`a8d4680580b5b7bba71b5695957a82bf2b993c53`](https://github.com/anomalyco/v2/commit/a8d4680580b5b7bba71b5695957a82bf2b993c53) Thanks [@vimtor](https://github.com/vimtor)! - Change the default Lambda runtime to `nodejs24.x` for all function-based constructs.
+
 ## 2.49.8
 
 ### Patch Changes
