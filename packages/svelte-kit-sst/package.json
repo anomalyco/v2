@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sst/v2.git",
+    "url": "https://github.com/anomalyco/v2.git",
     "directory": "packages/svelte-kit-sst"
   },
   "keywords": [

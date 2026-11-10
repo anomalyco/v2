@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sst/v2.git",
+    "url": "git+https://github.com/anomalyco/v2.git",
     "directory": "packages/cli"
   },
   "exports": {

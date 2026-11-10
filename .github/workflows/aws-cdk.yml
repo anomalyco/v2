@@ -7,6 +7,10 @@ jobs:
   patch:
     name: patch
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -15,8 +19,12 @@ jobs:
         # https://github.com/actions/setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 22.x
           registry-url: "https://registry.npmjs.org"
+
+      - name: Update npm
+        # trusted publishing needs npm 11.5.1+ and node 22.14+
+        run: npm install -g npm@latest
 
       - name: Set up Git and GitHub credentials
         env:
@@ -28,7 +36,6 @@ jobs:
       - name: patch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           #!/bin/bash
           set -e
@@ -41,6 +48,7 @@ jobs:
           tar -xvf cdk.tar.gz
           PACKAGE_JSON=./package/package.json
           VERSION=$(jq -r .version $PACKAGE_JSON)-1
+          # npm checks package.json repository against the repo the workflow runs in
           jq -c '
             .dependencies += (
               .devDependencies |
@@ -56,6 +64,10 @@ jobs:
               )
             ) |
             .name = "sst-aws-cdk" |
+            .repository = {
+              "type": "git",
+              "url": "https://github.com/anomalyco/v2.git"
+            } |
             del(.exports)
           ' $PACKAGE_JSON > tmp.json
           mv tmp.json $PACKAGE_JSON
