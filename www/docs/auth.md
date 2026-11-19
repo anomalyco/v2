@@ -479,6 +479,20 @@ FacebookAdapter({
 
 ---
 
+### OpenAuth
+
+Extends the `OauthAdapter` and pre-configures it to work with OpenAuth.
+
+```js
+OpenauthAdapter({
+  issuer: "https://auth.example.com",
+  clientID: "<client-id>",
+  onSuccess: async (claims, tokenset) => {},
+})
+```
+
+---
+
 ### Magic Links
 
 Issues magic links that you can send over email or SMS to verify users without the need of a password.
