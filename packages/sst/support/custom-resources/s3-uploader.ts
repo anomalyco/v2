@@ -77,7 +77,7 @@ async function uploadFiles(props: Props) {
     fileOptions,
     replaceValues,
   } = props;
-  await Promise.all(
+  const results = await Promise.all(
     sources.map((source) =>
       lambda.send(
         new InvokeCommand({
@@ -96,6 +96,18 @@ async function uploadFiles(props: Props) {
       )
     )
   );
+
+  // Check for Lambda execution errors
+  results.forEach((result, index) => {
+    if (result.FunctionError) {
+      const source = sources[index];
+      const payload = JSON.parse(Buffer.from(result.Payload!).toString());
+      const error = new Error();
+      // @ts-ignore
+      error.reason = `${payload.errorType}: ${payload.errorMessage} [${source.bucketName}/${source.objectKey}]`;
+      throw error;
+    }
+  });
 }
 
 async function purgeOldFiles(props: Props) {
