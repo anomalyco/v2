@@ -7,10 +7,14 @@ import { useBus } from "../bus.js";
 import { useAWSClient, useAWSProvider } from "../credentials.js";
 import { Logger } from "../logger.js";
 import { StackDeploymentResult, monitor, isFailed } from "./monitor.js";
+import { createCdkDeployments } from "./deploy.js";
+import { ConfigOptions, useProject } from "../project.js";
 
 export async function removeMany(stacks: CloudFormationStackArtifact[]) {
   await useAWSProvider();
   const bus = useBus();
+  const { cdk } = useProject().config;
+  const deployment = await createCdkDeployments();
   const complete = new Set<string>();
   const todo = new Set(stacks.map((s) => s.id));
 
@@ -35,7 +39,7 @@ export async function removeMany(stacks: CloudFormationStackArtifact[]) {
           continue;
         }
 
-        remove(stack).then((result) => {
+        remove(deployment, stack, cdk).then((result) => {
           results[stack.id] = result;
           complete.add(stack.id);
 
@@ -71,14 +75,21 @@ export async function removeMany(stacks: CloudFormationStackArtifact[]) {
 }
 
 export async function remove(
-  stack: CloudFormationStackArtifact
+  deployment: Awaited<ReturnType<typeof createCdkDeployments>>,
+  stack: CloudFormationStackArtifact,
+  cdkOptions?: ConfigOptions["cdk"]
 ): Promise<StackDeploymentResult> {
   Logger.debug("Removing stack", stack.id);
   const cfn = useAWSClient(CloudFormationClient);
+  
+  const env = await deployment.envs.accessStackForMutableStackOperations(stack);
+  const executionRoleArn = cdkOptions?.cloudFormationExecutionRole ?? await env.replacePlaceholders(stack.cloudFormationExecutionRoleArn);
+
   try {
     await cfn.send(
       new DeleteStackCommand({
         StackName: stack.stackName,
+        RoleARN: executionRoleArn,
       })
     );
     return monitor(stack.stackName);
