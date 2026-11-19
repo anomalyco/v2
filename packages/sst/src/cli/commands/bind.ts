@@ -150,6 +150,7 @@ export const bind = (program: Program) =>
             await Stacks.synth({
               fn: sstConfig.stacks,
               mode: "remove",
+              buildDir: `.sst/bind`,
             });
           }
 
