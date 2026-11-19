@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { Builder } from "@sveltejs/kit/types";
+import type { Builder } from "@sveltejs/kit";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default function () {
